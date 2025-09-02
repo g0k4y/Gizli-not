@@ -1,109 +1,49 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <title>Gizli Not</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            padding: 0;
-            background: #ffe6f2;
-            overflow: hidden;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        #giris {
-            text-align: center;
-        }
-        #not {
-            display: none;
-            text-align: center;
-            font-size: 28px;
-            font-weight: bold;
-            color: #c2185b;
-            animation: fadeIn 2s forwards, nefes 3s ease-in-out infinite;
-            text-shadow: 1px 1px 6px rgba(255, 182, 193, 0.7);
-        }
-        #not span {
-            display: block;
-            margin-top: 15px;
-            font-size: 24px;
-            color: #e91e63;
-        }
-        input, button {
-            padding: 10px;
-            margin: 5px;
-            border: 2px solid #d63384;
-            border-radius: 10px;
-            outline: none;
-            font-size: 16px;
-        }
-        button {
-            background: #d63384;
-            color: white;
-            cursor: pointer;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
-        }
-        @keyframes nefes {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        .kalp {
-            position: absolute;
-            color: pink;
-            font-size: 20px;
-            animation: yukari 4s linear forwards;
-        }
-        @keyframes yukari {
-            0% { transform: translateY(0) scale(1); opacity: 1; }
-            100% { transform: translateY(-600px) scale(1.5); opacity: 0; }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gizli Not</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #ffe6f0;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+    .note {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #d63384;
+      text-align: center;
+      animation: breathe 3s infinite ease-in-out;
+    }
+    @keyframes breathe {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    iframe {
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
-    <div id="giris">
-        <h2>Telefon Şifren</h2>
-        <input type="password" id="sifre" placeholder="Şifre">
-        <button onclick="kontrol()">Gönder</button>
-    </div>
+  <div class="note">
+    Not: Gitmeden son kez sözümü tutmak istedim,<br>
+    Seni Seviyorum ❤️
+  </div>
 
-    <div id="not">
-        💌 Gitmeden son kez sözümü tutmak istedim  
-        <span>❤️ Seni çok seviyorum ❤️</span>
-    </div>
-
-    <script>
-        function kontrol() {
-            const dogruSifre = "090625"; // Buraya kendi şifreni yaz
-            const girilen = document.getElementById("sifre").value;
-
-            if (girilen === dogruSifre) {
-                document.getElementById("giris").style.display = "none";
-                document.getElementById("not").style.display = "block";
-
-                // Kalp animasyonları
-                setInterval(() => {
-                    let kalp = document.createElement("div");
-                    kalp.classList.add("kalp");
-                    kalp.innerHTML = "💖";
-                    kalp.style.left = Math.random() * window.innerWidth + "px";
-                    kalp.style.bottom = "0px";
-                    document.body.appendChild(kalp);
-
-                    setTimeout(() => kalp.remove(), 4000);
-                }, 300);
-            } else {
-                alert("Hatalı şifre!");
-            }
-        }
-    </script>
+  <!-- Spotify müzik çalar -->
+  <iframe style="border-radius:12px" 
+    src="https://open.spotify.com/embed/track/0VZwJ1epQLAJDklsLOm0tB?utm_source=generator" 
+    width="100%" height="152" frameborder="0" 
+    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
+  </iframe>
 </body>
 </html>
