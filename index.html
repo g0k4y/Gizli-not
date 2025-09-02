@@ -3,47 +3,147 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gizli Not</title>
+  <title>Telefon Şifren</title>
   <style>
     body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f8e1f4;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
       height: 100vh;
-      background: #ffe6f0;
-      margin: 0;
-      font-family: Arial, sans-serif;
       overflow: hidden;
     }
+
+    .container {
+      text-align: center;
+    }
+
+    h2 {
+      color: #d63384;
+      margin-bottom: 20px;
+    }
+
+    input {
+      padding: 10px;
+      font-size: 1rem;
+      border: 2px solid #d63384;
+      border-radius: 10px;
+      outline: none;
+      text-align: center;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      font-size: 1rem;
+      background: #d63384;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #b02e6e;
+    }
+
     .note {
+      display: none;
       font-size: 2rem;
       font-weight: bold;
       color: #d63384;
       text-align: center;
       animation: breathe 3s infinite ease-in-out;
+      z-index: 2;
+      position: relative;
     }
+
     @keyframes breathe {
       0% { transform: scale(1); }
       50% { transform: scale(1.05); }
       100% { transform: scale(1); }
     }
+
+    .hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .heart {
+      position: absolute;
+      color: pink;
+      font-size: 20px;
+      animation: floatUp 5s linear infinite;
+    }
+
+    @keyframes floatUp {
+      from { transform: translateY(100vh) scale(1); opacity: 1; }
+      to { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+    }
+
     iframe {
       margin-top: 20px;
+      border-radius: 12px;
     }
   </style>
 </head>
 <body>
-  <div class="note">
-    Not: Gitmeden son kez sözümü tutmak istedim,<br>
-    Seni Seviyorum ❤️
+  <div class="container" id="loginScreen">
+    <h2>Telefon Şifren</h2>
+    <input type="password" id="password" placeholder="Şifreyi Gir">
+    <br>
+    <button onclick="checkPassword()">Giriş Yap</button>
   </div>
 
-  <!-- Spotify müzik çalar -->
-  <iframe style="border-radius:12px" 
-    src="https://open.spotify.com/embed/track/0VZwJ1epQLAJDklsLOm0tB?utm_source=generator" 
-    width="100%" height="152" frameborder="0" 
-    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
-  </iframe>
+  <div class="note" id="noteScreen">
+    Not: Gitmeden son kez sözümü tutmak istedim,<br>
+    Seni Seviyorum ❤️
+
+    <!-- Spotify müzik çalar -->
+    <iframe src="https://open.spotify.com/embed/track/0VZwJ1epQLAJDklsLOm0tB?utm_source=generator" 
+      width="300" height="152" frameborder="0" 
+      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
+    </iframe>
+  </div>
+
+  <div class="hearts" id="heartsContainer"></div>
+
+  <script>
+    function checkPassword() {
+      const input = document.getElementById("password").value;
+      if (input === "090625") {
+        document.getElementById("loginScreen").style.display = "none";
+        document.getElementById("noteScreen").style.display = "block";
+        startHearts();
+      } else {
+        alert("Yanlış şifre!");
+      }
+    }
+
+    function startHearts() {
+      const container = document.getElementById("heartsContainer");
+      setInterval(() => {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "💗";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = Math.random() * 20 + 20 + "px";
+        container.appendChild(heart);
+
+        setTimeout(() => {
+          heart.remove();
+        }, 5000);
+      }, 300);
+    }
+  </script>
 </body>
 </html>
